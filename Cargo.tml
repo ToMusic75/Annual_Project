@@ -1,0 +1,12 @@
+[package]
+name = "ml_lib"
+version = "0.1.0"
+authors = ["Damien Smagghe <damien.smagghe@hotmail.fr>"]
+
+[lib]
+name = "libml_lib"
+crate-type = ["dylib"]
+
+[dependencies]
+rulinalg = "0.4.2"
+rand = "0.5.1"
