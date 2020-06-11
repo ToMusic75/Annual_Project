@@ -1,0 +1,8 @@
+django
+ipython
+requests
+pillow
+gunicorn
+matplotlib
+jupyter
+numpy
