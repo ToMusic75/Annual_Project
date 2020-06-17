@@ -3,6 +3,7 @@ use std::slice::from_raw_parts;
 use crate::linear_model::LinearModel;
 
 mod linear_model;
+mod mlp;
 
 #[no_mangle]
 pub extern fn linear_create_model(inputs_size: usize) -> *const LinearModel {
