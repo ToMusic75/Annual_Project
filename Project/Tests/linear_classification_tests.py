@@ -1,12 +1,21 @@
 import ctypes
 import numpy as np
 import matplotlib.pyplot as plt
+from sys import platform
 
 USE_RUST = True
 
 if __name__ == "__main__":
+    path_to_dll = "../Lib/target/debug/liblib.dylib"
+    if platform == "linux" or platform == "linux2":
+        #To do for linux
+        print("to do for linux")
+    elif platform == "darwin":
+        path_to_dll = "../Lib/target/debug/liblib.dylib"
+    elif platform == "win32":
+        #to do for windows
+        print("to do for windows")
 
-    path_to_dll = "../Lib/target/debug/lib.d"
     my_lib = ctypes.CDLL(path_to_dll)
 
     my_lib.linear_create_model.argtypes = [ctypes.c_int]
