@@ -63,7 +63,7 @@ impl MLPModel {
         }
     }
 
-    fn predict_common(&self, sample_inputs: Vec<f64>, classification_mode: bool) -> Vec<f64> {
+    fn predict_common(&self, sample_inputs: Vec<f64>, classification_mode: bool) -> &_ {
         let mut x = &self.x;
         let npl = &self.npl;
         for j in 1..npl[0] + 1 {
@@ -82,7 +82,7 @@ impl MLPModel {
                 &self.x[layer][j] = res.borrow();
             }
         }
-        &self.x[&self.L];
+        &self.x[&self.L]
     }
 
     pub fn predict_classification(&self, sample_inputs: Vec<f64>) -> &Vec<f64> {
@@ -93,7 +93,7 @@ impl MLPModel {
         return &self.predict_common( sample_inputs, false);
     }
 
-    fn train_common(&self, dataset_inputs: Vec<Vec<f64>>, dataset_expected_outputs: Vec<Vec<f64>>, dataset_samples_count: usize, iteration_count: usize, alpha: f64, classification_mode: bool)  {
+    fn train_common(&self, dataset_inputs: &[[f64]], dataset_expected_outputs: &[[f64]], dataset_samples_count: usize, dataset_sample_features_count: usize, iteration_count: usize, alpha: f64, classification_mode: bool)  {
         for it in 0..iteration_count {
             let k = rng.gen_range(0, dataset_samples_count);
             &self.predict_common(dataset_inputs[k], classification_mode);
@@ -127,11 +127,11 @@ impl MLPModel {
         }
     }
 
-    pub fn train_classification(&self,dataset_inputs: Vec<Vec<f64>>, dataset_expected_outputs: Vec<Vec<f64>>, dataset_samples_count: usize, iteration_count: usize, alpha: f64) {
-        &self.train_common(dataset_inputs, dataset_expected_outputs, dataset_samples_count, iteration_count, alpha, true);
+    pub fn train_classification(&self,dataset_inputs: &[[f64]], dataset_expected_outputs: &[[f64]], dataset_samples_count: usize,dataset_sample_features_count:usize, iteration_count: usize, alpha: f64) {
+        &self.train_common(dataset_inputs, dataset_expected_outputs, dataset_samples_count,dataset_sample_features_count, iteration_count, alpha, true);
     }
 
-    pub fn train_regression(&self,dataset_inputs: Vec<Vec<f64>>, dataset_expected_outputs: Vec<Vec<f64>>, dataset_samples_count: usize, iteration_count: usize, alpha: f64) {
-        &self.train_common(dataset_inputs, dataset_expected_outputs, dataset_samples_count, iteration_count, alpha, false);
+    pub fn train_regression(&self,dataset_inputs: &[[f64]], dataset_expected_outputs: &[[f64]], dataset_samples_count: usize, dataset_sample_features_count:usize, iteration_count: usize, alpha: f64) {
+        &self.train_common(dataset_inputs, dataset_expected_outputs, dataset_samples_count, dataset_sample_features_count, iteration_count, alpha, false);
     }
 }
