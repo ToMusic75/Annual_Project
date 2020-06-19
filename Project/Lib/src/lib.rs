@@ -12,8 +12,8 @@ pub extern fn linear_create_model(inputs_size: usize) -> *const LinearModel {
 }
 
 #[no_mangle]
-pub extern fn mlp_create_model(inputs_size: usize) -> *const MLPModel {
-    Box::leak(Box::new( MLPModel::new(npl: Vec<i64>, inputs_size)));
+pub extern fn mlp_create_model(npl: Vec<usize>) -> *const MLPModel {
+    Box::leak(Box::new( MLPModel::new(npl)));
 }
 
 #[no_mangle]
@@ -57,7 +57,7 @@ pub extern fn mlp_predict_regression(model_ptr: *const MLPModel,
         inputs = from_raw_parts(inputs_ptr, inputs_size);
     }
 
-    mlp.predict_regression(inputs, inputs_size)
+    model.predict_common()
 }
 
 #[no_mangle]
@@ -75,7 +75,7 @@ pub extern fn linear_predict_model_classification(model_ptr: *const LinearModel,
 }
 
 #[no_mangle]
-pub extern fn mlp_predict_classification(model_ptr: *const MLPmodel,
+pub extern fn mlp_predict_classification(model_ptr: *const MLPModel,
                                                   inputs_ptr: *mut f64,
                                                   inputs_size: usize) -> f64 {
     let model;
@@ -85,7 +85,7 @@ pub extern fn mlp_predict_classification(model_ptr: *const MLPmodel,
         inputs = from_raw_parts(inputs_ptr, inputs_size);
     }
 
-    model.predict_classification(inputs, inputs_size)
+    model.predict_common()
 }
 
 

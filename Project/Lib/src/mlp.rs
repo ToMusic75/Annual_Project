@@ -146,7 +146,7 @@ impl MLPModel {
         return x
     }
     pub fn predict_common(&self, mut x_el: Vec<f64>, mut w: Vec<Vec<Vec<f64>>>, npl: Vec<usize>, classification_mode: bool) -> Vec<f64> {
-        _el.insert(0, 1_f64);
+        x_el.insert(0, 1_f64);
         let mut predictions: Vec<f64> = &self.feed_forward(&mut w, &x_el, &npl, classification_mode).pop();
         predictions.remove(0);
         predictions
@@ -156,7 +156,6 @@ impl MLPModel {
 
     pub fn train_common(
         &self,
-        mut w: Vec<Vec<Vec<f64>>>,
         mut x: Vec<Vec<f64>>,
         y_train: Vec<Vec<f64>>,
         alpha: f64,
@@ -165,7 +164,7 @@ impl MLPModel {
         npl: Vec<usize>,
         classification_mode: bool
     ) {
-
+        let mut w = &self.w;
         let mut x = x;
         w.insert(0, rand::thread_rng().gen_range(-1.0, 1.0));
 
@@ -179,7 +178,7 @@ impl MLPModel {
             index_list.shuffle(&mut rand::thread_rng());
 
             for i in index_list.iter().map(|x| *x) {
-                let x: Vec<Vec<f64>> = &self.feed_forward(&mut w, &x[i], &npl, classification_mode);
+                let x: Vec<Vec<f64>> = &self.feed_forward(mut w, &x[i], &npl, classification_mode);
                 deltas = init_last_delta(deltas, &x, &y_train[i], &npl);
                 deltas = init_all_deltas(deltas, &x, &w, &npl);
                 update_w(&mut w, &deltas, alpha, &x, &npl);
@@ -189,24 +188,22 @@ impl MLPModel {
     }
 
     pub fn train_classification(&self,
-                               mut w: Vec<Vec<Vec<f64>>>,
                                mut x: Vec<Vec<f64>>,
                                y_train: Vec<Vec<f64>>,
                                alpha: f64,
                                iteration_count: usize,
                                _loss_stop: bool,
                                npl: Vec<usize>) -> &() {
-        &self.train_common(w, x, y_train, alpha,iteration_count,_loss_stop,npl, true)
+        &self.train_common(x, y_train, alpha,iteration_count,_loss_stop,npl, true)
     }
 
     pub fn train_regression(&self,
-                                mut w: Vec<Vec<Vec<f64>>>,
                                 mut x: Vec<Vec<f64>>,
                                 y_train: Vec<Vec<f64>>,
                                 alpha: f64,
                                 iteration_count: usize,
                                 _loss_stop: bool,
                                 npl: Vec<usize>) -> &() {
-        &self.train_common(w, x, y_train, alpha,iteration_count,_loss_stop,npl, false)
+        &self.train_common( x, y_train, alpha,iteration_count,_loss_stop,npl, false)
     }
 }
