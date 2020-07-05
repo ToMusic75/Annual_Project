@@ -7,3 +7,13 @@ h1 {
   text-align : center;
   margin-top : 30px;
 }
+
+.btn-primary {
+  background-color: black;
+  border-color: black;
+}
+
+.btn-primary:hover {
+    background-color: #A9A9A9;
+  border-color: #A9A9A9;
+}
