@@ -1,0 +1,69 @@
+<header>
+  <img src="../assets/icon.png" alt="App icon" />
+  <h1>
+    Car recognition APP
+  </h1>
+</header>
+<main>
+  <div class="app__information">
+    <h2>Informations</h2>
+    <p>
+      This app aims to categorize a given input picture of the front part of a
+      car and tell whhich brand it is. You are able to use various models that
+      were built during the Machine Learning experimentation through the select
+      option input below.
+    </p>
+    <h3>Supported car brands:</h3>
+    <ul>
+      <li>Peugeot</li>
+      <li>Renault</li>
+      <li>Volswagen</li>
+    </ul>
+  </div>
+  <div class="app__inputs">
+    <h2>Options</h2>
+    <div class="app__inputs__sub-container">
+      <label for="modelSelect">Model selection :</label>
+      <select [(ngModel)]="selectedModel" name="modelSelect" id="modelSelect">
+        <option *ngFor="let opt of modelOptions" [value]="opt">{{
+          opt
+        }}</option>
+      </select>
+      <br />
+      <label for="fileInput">Select an car front picture :</label>
+      <input
+        name="fileInput"
+        id="fileInput"
+        type="file"
+        (change)="fileChangeEvent($event)"
+      />
+      <h3>Image cropper :</h3>
+      <image-cropper
+        [imageChangedEvent]="imageChangedEvent"
+        [aspectRatio]="1 / 1"
+        format="jpeg"
+        (imageCropped)="imageCropped($event)"
+        (imageLoaded)="imageLoaded()"
+      ></image-cropper>
+    </div>
+  </div>
+  <div class="app__results">
+    <h2>Your image :</h2>
+    <div class="app__results__box">
+      <img [src]="croppedImage" />
+      <h2 class="app__results__response" *ngIf="picClass">
+        Our model predict that the car is an {{ picClass }}
+      </h2>
+    </div>
+
+    <p>
+      Selected model is <strong>{{ selectedModel }}</strong>
+    </p>
+    <button
+      [disabled]="!selectedModel || !isImage ? 'disabled' : null"
+      (click)="submitImage()"
+    >
+      Submit image
+    </button>
+  </div>
+</main>
