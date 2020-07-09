@@ -43,11 +43,99 @@ image-cropper {
         }
     }
     &__results {
+        margin-bottom: 20px;
         &__box {
+            height: 160px;
             img {
                 height: 100px;
                 max-width: 100%;
             }
         }
+        &__response {
+            font-weight: normal;
+
+            .strong {
+                font-weight: bold !important;
+                color: #2ecc71 !important;
+            }
+            img {
+                width: 50px;
+                height: 50px;
+                margin-left: 15px;
+            }
+        }
+        button {
+            width: 140px;
+            height: 40px;
+            text-transform: uppercase;
+            font-weight: bold;
+            background: #f3f0f1;
+            position: relative;
+            background: #f3f0f1;
+            margin-bottom: 25px;
+            border-radius: 16px;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            transition: all 0.1s ease-in-out;
+            font-family: "Roboto", sans-serif;
+            box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
+            color: #6f6cde;
+            &:disabled {
+                opacity: 0.5;
+                color: #bdc3c7;
+                pointer-events: none;
+            }
+            &:hover {
+                opacity: 0.6;
+                box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
+            }
+            &:active {
+                opacity: 1 !important;
+                box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5), inset 8px 8px 16px rgba(0, 0, 0, 0.1) !important;
+                color: #79e3b6 !important;
+            }
+        }
     }
+}
+
+// Select option snippet
+
+.box select {
+    border-radius: 10px;
+    background-color: #6f6cde;
+    color: white;
+    padding: 12px;
+    width: 160px;
+    border: none;
+    font-size: 16px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline: none;
+}
+
+.box::before {
+    content: "\f13a";
+    font-family: FontAwesome;
+    position: absolute;
+    top: 0;
+    right: 5px;
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    font-size: 28px;
+    line-height: 45px;
+    color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+}
+
+.box:hover::before {
+    color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.box select option {
+    padding: 30px;
 }

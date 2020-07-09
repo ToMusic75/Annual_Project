@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { ImageCroppedEvent } from "ngx-image-cropper";
-import { FlaskRequestsService } from "./flask-requests.service";
+import { FlaskRequestsService, ModelResponse } from "./flask-requests.service";
 
 @Component({
   selector: "app-root",
@@ -20,6 +20,7 @@ export class AppComponent {
   isImage: boolean = false;
   selectedModel: string = "mlp_model";
   picClass: string;
+  picClassLogo: string;
 
   constructor(private flaskRequestsService: FlaskRequestsService) {}
 
@@ -35,14 +36,28 @@ export class AppComponent {
   loadImageFailed() {
     window.alert("Fail to load image");
   }
+
   submitImage() {
     this.flaskRequestsService
       .sendPicture({
         model_id: this.selectedModel,
         image: this.croppedImage,
       })
-      .subscribe((res) => {
-        console.log(res);
-      });
+      .subscribe(
+        (res: ModelResponse) => {
+          this.updatePrediction(res);
+        },
+        () => {
+          console.error("API ERROR");
+        }
+      );
+  }
+  updatePrediction(prediction: ModelResponse) {
+    let max = Object.keys(prediction.prediction).reduce((a, b) =>
+      prediction.prediction[a] > prediction.prediction[b] ? a : b
+    );
+    console.log(max);
+    this.picClass = max;
+    this.picClassLogo = `../assets/logo_${max}.png`;
   }
 }

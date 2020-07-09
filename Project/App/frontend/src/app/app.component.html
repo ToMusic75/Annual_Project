@@ -17,18 +17,20 @@
     <ul>
       <li>Peugeot</li>
       <li>Renault</li>
-      <li>Volswagen</li>
+      <li>Volkswagen</li>
     </ul>
   </div>
   <div class="app__inputs">
     <h2>Options</h2>
     <div class="app__inputs__sub-container">
-      <label for="modelSelect">Model selection :</label>
-      <select [(ngModel)]="selectedModel" name="modelSelect" id="modelSelect">
-        <option *ngFor="let opt of modelOptions" [value]="opt">{{
-          opt
-        }}</option>
-      </select>
+      <div class="box">
+        <label for="modelSelect">Model selection :</label>
+        <select [(ngModel)]="selectedModel" name="modelSelect" id="modelSelect">
+          <option *ngFor="let opt of modelOptions" [value]="opt">{{
+            opt
+          }}</option>
+        </select>
+      </div>
       <br />
       <label for="fileInput">Select an car front picture :</label>
       <input
@@ -52,7 +54,9 @@
     <div class="app__results__box">
       <img [src]="croppedImage" />
       <h2 class="app__results__response" *ngIf="picClass">
-        Our model predict that the car is an {{ picClass }}
+        Our model predict that the car is an
+        <span class="strong">{{ picClass }} !</span>
+        <img [src]="picClassLogo" alt="Brand logo" />
       </h2>
     </div>
 

@@ -55,9 +55,6 @@ def predict():
             'peugeot': prediction[0][0],
             'renault': prediction[0][1],
             'volkswagen': prediction[0][2],
-            #'peugeot': 1,
-            #'renault': 0,
-            #'volkswagen': 0,
         }
     }
     return jsonify(response), 201
