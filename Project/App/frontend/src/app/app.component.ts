@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { ImageCroppedEvent } from "ngx-image-cropper";
+import { FlaskRequestsService } from "./flask-requests.service";
 
 @Component({
   selector: "app-root",
@@ -8,12 +9,19 @@ import { ImageCroppedEvent } from "ngx-image-cropper";
 })
 export class AppComponent {
   title = "frontend";
-  modelOptions: string[] = ["1", "2", "3"];
+  modelOptions: string[] = [
+    "linear_model",
+    "mlp_model",
+    "svm_model",
+    "cnn_model",
+  ];
   imageChangedEvent: any = "";
   croppedImage: any = "";
   isImage: boolean = false;
-  selectedModel: string = "1";
+  selectedModel: string = "mlp_model";
   picClass: string;
+
+  constructor(private flaskRequestsService: FlaskRequestsService) {}
 
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
@@ -24,14 +32,17 @@ export class AppComponent {
     this.isImage = true;
   }
 
-  imageLoaded() {
-    // show cropper
-  }
-
   loadImageFailed() {
     window.alert("Fail to load image");
   }
   submitImage() {
-    console.log("cc");
+    this.flaskRequestsService
+      .sendPicture({
+        model_id: this.selectedModel,
+        image: this.croppedImage,
+      })
+      .subscribe((res) => {
+        console.log(res);
+      });
   }
 }

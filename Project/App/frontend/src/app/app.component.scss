@@ -42,4 +42,12 @@ image-cropper {
             }
         }
     }
+    &__results {
+        &__box {
+            img {
+                height: 100px;
+                max-width: 100%;
+            }
+        }
+    }
 }

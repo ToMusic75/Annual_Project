@@ -22,11 +22,11 @@
 $ cd Project/
 $ cd App/
 $ cd backend/
-$ export FLASK_APP=app.py
+$ export FLASK_APP=predict_app.py
 $ flask run --host=0.0.0.0
 ```
 
-The Flask web service should be running on **http://localhost:5000**
+The Flask web service should be running on **http://localhost:5000** or **http://0.0.0.0:5000/**
 
 3. Setup the angular front end to interact with models and test them:
 
