@@ -18,8 +18,9 @@ models = {}
 
 def get_models():
     for model in os.listdir(modelsDirectory):
-        models[model] = load_model(modelsDirectory + model)
-        print(model + " loaded !")
+        if (model.endswith("h5")):
+            models[model] = load_model(os.path.join(modelsDirectory, model))
+            print(model + " loaded !")
 
 def preprocess_image(image, target_size):
     image = image.resize(target_size)
