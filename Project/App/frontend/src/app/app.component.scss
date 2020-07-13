@@ -26,9 +26,15 @@ header {
 
 main {
     padding: 20px 40px;
+    background-image: url(../assets/bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
 }
 
 image-cropper {
+    --cropper-outline-color: transparent;
+    --cropper-overlay-color: transparent;
     height: 100px;
     width: 100%;
 }
@@ -79,7 +85,7 @@ image-cropper {
             cursor: pointer;
             transition: all 0.1s ease-in-out;
             font-family: "Roboto", sans-serif;
-            box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
+            //box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
             color: #6f6cde;
             &:disabled {
                 opacity: 0.5;
@@ -88,11 +94,11 @@ image-cropper {
             }
             &:hover {
                 opacity: 0.6;
-                box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
+                //box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
             }
             &:active {
                 opacity: 1 !important;
-                box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5), inset 8px 8px 16px rgba(0, 0, 0, 0.1) !important;
+                //box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5), inset 8px 8px 16px rgba(0, 0, 0, 0.1) !important;
                 color: #79e3b6 !important;
             }
         }
@@ -117,6 +123,7 @@ image-cropper {
 
 .box::before {
     content: "\f13a";
+    visibility: hidden;
     font-family: FontAwesome;
     position: absolute;
     top: 0;

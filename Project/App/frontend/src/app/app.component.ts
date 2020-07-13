@@ -56,7 +56,7 @@ export class AppComponent {
     let max = Object.keys(prediction.prediction).reduce((a, b) =>
       prediction.prediction[a] > prediction.prediction[b] ? a : b
     );
-    console.log(max);
+    console.log(prediction.prediction);
     this.picClass = max;
     this.picClassLogo = `../assets/logo_${max}.png`;
   }

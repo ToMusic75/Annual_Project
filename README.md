@@ -39,3 +39,15 @@ $ ng serve
 ```
 
 The Angular front-end app should be running on **http://localhost:4200/**
+
+4. Run tensorboard to view all the logs.
+
+```console
+$ tensorboard --logdir Project/Docs/Results/Logs
+```
+
+5. Remove all DS store to be sure
+
+```console
+$ find . -name '.DS_Store' -type f -delete
+```
