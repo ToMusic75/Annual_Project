@@ -75,7 +75,6 @@ image-cropper {
             height: 40px;
             text-transform: uppercase;
             font-weight: bold;
-            background: #f3f0f1;
             position: relative;
             background: #f3f0f1;
             margin-bottom: 25px;
@@ -109,8 +108,8 @@ image-cropper {
 
 .box select {
     border-radius: 10px;
-    background-color: #6f6cde;
-    color: white;
+    background: #f3f0f1;
+    color: #6f6cde;
     padding: 12px;
     width: 160px;
     border: none;
